@@ -12,21 +12,22 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator())
 
-app.get('/', (req, res) => {
-  res.render('index')
+const login = (req, res, next) => {
+  if (req.body.username === 'JohnnyRico' && req.body.password === 'Roughnecks123') {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+}
+
+app.get('/login', (req, res) => {
+  res.render('login')
 })
 
-app.post('/', (req, res) => {
-  req.checkBody('login', '*You must login to access this site.').notEmpty()
-  req.checkBody('password', '*Please provide a password.').notEmpty()
+app.use(login)
 
-  const errors = req.validationErrors()
-  console.log(errors)
-  if (errors) {
-    res.render('login', { errors: errors })
-  } else {
-    res.render('index', { login: req.body.login })
-  }
+app.post('/', (req, res) => {
+  res.render('index', req.body)
 })
 
 app.listen(3000, () => {

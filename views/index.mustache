@@ -3,16 +3,10 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/style.css">
-    <title>Login</title>
+    <title>Booyah!</title>
   </head>
   <body>
-    <form class="form" action="/login" method="post">
-        {{#errors}}
-          <p class="msg">{{msg}}</p>
-        {{/errors}}
-        <input type="login" name="login" placeholder="Login">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit" name="button">Login</button>
-      </form>
+    <h1>Congratulations!</h1>
+    <p>You are logged in as {{username}}.</p>
   </body>
 </html>
